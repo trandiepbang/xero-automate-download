@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__playwright__browser_snapshot",
+      "Bash(python3 -c \":*)",
+      "mcp__playwright__browser_wait_for",
+      "Bash(npx playwright:*)",
+      "Bash(node -e \"const {execSync} = require\\(''child_process''\\); execSync\\(''screencapture -x /tmp/test_screen.png''\\); console.log\\(''screencapture ok''\\);\")"
+    ]
+  }
+}

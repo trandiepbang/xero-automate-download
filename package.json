@@ -1,0 +1,17 @@
+{
+  "name": "xero-report-downloader",
+  "version": "1.0.0",
+  "description": "Automated Xero report downloader",
+  "main": "xero-download.js",
+  "scripts": {
+    "start": "node xero-download.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
+    "otplib": "^12.0.1",
+    "playwright": "^1.42.0",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "robotjs": "^0.7.0"
+  }
+}

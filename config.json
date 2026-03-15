@@ -1,0 +1,23 @@
+{
+  "xero": {
+    "username": "darklegend2009@gmail.com",
+    "password": "9J!#d+7-fU2R5Bc",
+    "totp_secret": ""
+  },
+
+  "reports": [
+    { "name": "Balance Sheet",            "url": "/v1/Run/1017",  "enabled": true },
+    { "name": "Profit and Loss",          "url": "/v1/Run/1016",  "enabled": true },
+    { "name": "Aged Receivables Summary", "url": "/v1/Run/1001",  "enabled": true },
+    { "name": "Aged Payables Summary",    "url": "/v1/Run/1400",  "enabled": true },
+    { "name": "Account Transactions",     "url": "/v1/Run/1009",  "enabled": true }
+  ],
+
+  "output_dir": "./downloads",
+
+  "api_keys": {
+    "anthropic": "",
+    "mcp_server_url": "",
+    "mcp_api_key": ""
+  }
+}
