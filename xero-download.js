@@ -11,6 +11,7 @@ const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), '
 
 const BASE_URL = 'https://reporting.xero.com';
 const LOGIN_URL = 'https://login.xero.com/identity/user/login';
+const COOKIE_FILE = path.join(__dirname, '.xero-session.json');
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function prompt(question) {
@@ -43,24 +44,48 @@ async function waitForExport(page) {
 }
 
 // ─── Login ────────────────────────────────────────────────────────────────────
-async function login(page) {
+async function login(context, page) {
   console.log('\n[1/3] Logging in...');
+
+  // Load saved cookies — skips MFA if "Trust this device" was checked
+  if (fs.existsSync(COOKIE_FILE)) {
+    const cookies = JSON.parse(fs.readFileSync(COOKIE_FILE, 'utf8'));
+    await context.addCookies(cookies);
+    console.log('  → Loaded saved session (MFA may be skipped)');
+  }
+
   await page.goto(LOGIN_URL);
   await page.fill('input[placeholder="Email address"]', config.xero.username);
   await page.fill('input[placeholder="Password"]', config.xero.password);
   await page.click('button:has-text("Log in")');
 
-  // Wait for MFA screen
-  await page.waitForURL(/two-factor/, { timeout: 15000 });
-  console.log('  → MFA required');
+  // Check if MFA is required (skipped if Trust this device cookie is present)
+  const mfaRequired = await page.waitForURL(/two-factor/, { timeout: 8000 })
+    .then(() => true).catch(() => false);
 
-  const otp = await getOtp();
-  await page.fill('input[placeholder="123456"]', otp);
-  await page.click('button:has-text("Confirm")');
+  if (mfaRequired) {
+    console.log('  → MFA required');
+    const otp = await getOtp();
+    await page.fill('input[placeholder="123456"]', otp);
 
-  // Wait for redirect to Xero dashboard
+    // Tick "Trust this device"
+    const trustBox = page.locator('[data-automationid="auth-remembermecheckbox--input"]');
+    if (await trustBox.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await trustBox.check();
+      console.log('  → Checked "Trust this device"');
+    }
+
+    await page.click('button:has-text("Confirm")');
+  } else {
+    console.log('  → MFA skipped (trusted device)');
+  }
+
   await page.waitForURL(/go\.xero\.com/, { timeout: 20000 });
   console.log('  → Login successful');
+
+  // Save cookies for next run
+  const cookies = await context.cookies();
+  fs.writeFileSync(COOKIE_FILE, JSON.stringify(cookies, null, 2));
 }
 
 // ─── Get org ID from current URL ─────────────────────────────────────────────
@@ -81,19 +106,30 @@ async function downloadReport(page, orgId, report, outputDir) {
   console.log(`\n  Navigating to: ${report.name}`);
   await page.goto(reportUrl);
 
+  // Replay any recorded pre-export steps
+  if (report.steps && report.steps.length > 0) {
+    console.log(`  → Replaying ${report.steps.length} recorded step(s)...`);
+    for (const step of report.steps) {
+      try {
+        if (step.action === 'click') {
+          await page.click(step.selector, { timeout: 10000 });
+        } else if (step.action === 'select') {
+          await page.selectOption(step.selector, step.value, { timeout: 10000 });
+        } else if (step.action === 'fill') {
+          await page.fill(step.selector, step.value, { timeout: 10000 });
+        }
+      } catch (e) {
+        console.warn(`  ⚠ Step failed (${step.action} ${step.selector}): ${e.message}`);
+      }
+    }
+  }
+
   // Wait for Export button to appear
   try {
     await page.waitForSelector('button:has-text("Export")', { timeout: 20000 });
   } catch {
     console.log(`  ⚠ Timed out waiting for Export on "${report.name}" — skipping`);
     return false;
-  }
-
-  // Some reports need an Update click to generate data first
-  const updateBtn = page.locator('button:has-text("Update")');
-  if (await updateBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
-    await updateBtn.click();
-    await page.waitForSelector('[role="status"]:has-text("Report has finished loading")', { timeout: 20000 });
   }
 
   // Set up download listener
@@ -135,7 +171,7 @@ async function downloadReport(page, orgId, report, outputDir) {
 
   try {
     // Step 1: Login
-    await login(page);
+    await login(context, page);
 
     // Step 2: Get org ID
     console.log('\n[2/3] Detecting organisation...');

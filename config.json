@@ -4,17 +4,118 @@
     "password": "9J!#d+7-fU2R5Bc",
     "totp_secret": ""
   },
-
   "reports": [
-    { "name": "Balance Sheet",            "url": "/v1/Run/1017",  "enabled": true },
-    { "name": "Profit and Loss",          "url": "/v1/Run/1016",  "enabled": true },
-    { "name": "Aged Receivables Summary", "url": "/v1/Run/1001",  "enabled": true },
-    { "name": "Aged Payables Summary",    "url": "/v1/Run/1400",  "enabled": true },
-    { "name": "Account Transactions",     "url": "/v1/Run/1009",  "enabled": true }
+    {
+      "name": "Balance Sheet",
+      "url": "/v1/Run/1017",
+      "enabled": true
+    },
+    {
+      "name": "Profit and Loss",
+      "url": "/v1/Run/1016",
+      "enabled": true
+    },
+    {
+      "name": "Aged Receivables Summary",
+      "url": "/v1/Run/1001",
+      "enabled": true
+    },
+    {
+      "name": "Aged Payables Summary",
+      "url": "/v1/Run/1400",
+      "enabled": true
+    },
+    {
+      "name": "Account Transactions",
+      "url": "/v1/Run/1009",
+      "enabled": true
+    },
+    {
+      "name": "General Ledger Summary",
+      "url": "/v1/Run/1070",
+      "enabled": true
+    },
+    {
+      "name": "test",
+      "url": "/v1/Run/1021",
+      "enabled": true,
+      "steps": [
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]",
+          "label": "<input>"
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[3]",
+          "label": "<div aria-label=\"Tue Jul 08 2025\">"
+        },
+        {
+          "action": "fill",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]",
+          "label": "<input>",
+          "value": "8 Jul 2025"
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]",
+          "label": "<input>"
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]",
+          "label": "<div> \"T\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[5]",
+          "label": "<div aria-label=\"Thu Jun 18 2026\">"
+        },
+        {
+          "action": "fill",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1]",
+          "label": "<input>",
+          "value": "18 Jun 2026"
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]",
+          "label": "<button> \"10 columns selected\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[7]/div[1]/div[1]/label[1]/span[1]",
+          "label": "<span> \"Cost Limit\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[7]/div[1]/div[1]/label[1]/input[1]",
+          "label": "<input type=\"checkbox\">"
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[5]/button[1]",
+          "label": "<button> \"Update\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[5]/div[1]/footer[1]/div[1]/div[2]/div[2]/button[1]",
+          "label": "<button> \"Export\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[2]/button[1]/span[1]",
+          "label": "<span> \"Excel\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/a[1]",
+          "label": "<a>"
+        }
+      ]
+    }
   ],
-
   "output_dir": "./downloads",
-
   "api_keys": {
     "anthropic": "",
     "mcp_server_url": "",

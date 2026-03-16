@@ -1,0 +1,172 @@
+[
+  {
+    "name": ".AspNetCore.Antiforgery.C9aXng5w_sY",
+    "value": "CfDJ8FtFRQnJWKVEh4i11COZmLOGuE6OQcUAwD43VoICfODCYu_XF2xnwEIV4owNvUff7vBIWof9q8kEd2TReRX482WHECa8TbAcn0osSK4iVTeHnhUrBi3tO3MFHdEZKogQVPu_435MNIbbuxNEfyR53aw",
+    "domain": "login.xero.com",
+    "path": "/identity",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "xero-twofactor-signin",
+    "value": "CfDJ8FtFRQnJWKVEh4i11COZmLMqmlNl8ix7BF4kao0nh95MIxLFtPjwseub673m1r9CiMZ_QwsXYqt1dJkFgAh5KuNg8_8sARLwOOikDqj4-qBUm4xB8EIWGozXkBp9iA0nTrx2wRaiPI2suc804BvUMfQrcP-cFM7NJtFI7lSdBc-JdrFaZQEtLcRaJEQ8obUSRnqqS2nUbl07RA8Pq4vFQhDLJRLiog-5ivGZRmS6V784dxrrGPzAfDoysn-tYi7c9GVik2p08pmuHN0Jk3fd71eprXrR0ow4BPVnBZasj0yAam0RebTDekUd0Vw6PSApJhtyam6DnrU3UIKWSgc97p5qauOOPLqw5zYlB4fjdg2ew2PP5sJ6h6XV1SRi_zwgg3SM13dd7RLETaH2-AxcX2hstiw_HYKrwD1EKq48Vmp9nB0aytxiUr3wxSJ3_RJjz2LceE0DrYB0jIK3VL-okgKvm3EOmdOh5Gsh_kp_FlMKYxIDVh0FG1D_lsUo96VQqzC9Nxf2eIQXDDbOqTx4FS4McLO2UY21Ef-cCeg86Q4ifA6lZ4IAZKH65opSsm3sWEIa6UvjJdXkjThDHXuIDYJwMsy0jVdBW7TtsB8KvDnvBOHEU1krkRh_PFix3L0Yh0A1WsNJgrLkuRP6LXRAS1s",
+    "domain": "login.xero.com",
+    "path": "/identity",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "Device",
+    "value": "38fd3190-1243-41b0-92b8-86ee8da001a4",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1808227049.166696,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "ak_bmsc",
+    "value": "5DAD29D0DACA3E499703C78D5D06FB7F~000000000000000000000000000000~YAAQzuNH0nwmlL2cAQAAuV7L9h/+745CtwirBl2aIMUGN9Y6q49VVr4KEW3Ms+MB/G8fLUfZS7zl8KI6+kO7qnrFw4XEUWc1CniKqOkyZy01L9v9MDkNnZuTWFR/JiuUjluMEfo/FyEpXvvjglg/ynhLbrikuzIt2CRhnouwpFhwaomtTlav3CJqpe6I2A5wcCJrcHDJhhuRRH4Z6avT9hRSbbLP8ZB3HADOdRW0JZVoTG9ftbLTmphTIxMT13gcYPRPlciCSdaXDKOaKIwHYxVedJYXL/gaNoLXU4LGzIHP4PAjE07xJB0qLIP9Ms/jJAIPY/vYsb9r5JxUisXd7lUZzQf9QM7Mm8chqMkcdSEekwJTNoo5Mw6avWuDYMOtBcy52R08cHMZ9A==",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1773674248.168089,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "xero_cs",
+    "value": "0",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1773753513,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gcl_au",
+    "value": "1.1.729450257.1773667050",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1781443050,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "x-ga-session-id",
+    "value": "1773667049",
+    "domain": "login.xero.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gid",
+    "value": "GA1.2.1851305945.1773667050",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1773753513,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_fbp",
+    "value": "fb.1.1773667049711.267430876419721121",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1781443113,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "IDE",
+    "value": "AHWqTUkZo-wF18PF1JIjs1HDkr75p-rb79QfTEoM-lybr-JZhwx3mHxT-betikuhWz8",
+    "domain": ".doubleclick.net",
+    "path": "/",
+    "expires": 1808227049.764267,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "JSESSIONID",
+    "value": "3107986af3a474e6",
+    "domain": ".nr-data.net",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "x-ga-client-id",
+    "value": "539015651.1773667050",
+    "domain": "login.xero.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gat_UA-3776042-30",
+    "value": "1",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1773667173,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga",
+    "value": "GA1.1.539015651.1773667050",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1808227113.905733,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "bm_sz",
+    "value": "789C3F7E90703F8491DE81A9D242A332~YAAQz+NH0vR+7uGcAQAAiWDM9h9uJnGlNy8lEIXvXt8nTZv22qRTcy7IfH1dDVhx8v8dmb18/NxJ6OI0oxrOWJB0dFJn5znSCddj/YlkZ85UerrTppM6Kp+rSE5vbmYj3MKUgVgexpaK5eQPImnV8UPlHT5Re03LQh1kuwL4THkivA3Z8PZVNIX5jbwBJSFYsbWXEp8BuxEEigO9ejJts3V3bsQuFRPWYdQPKW+djH1Lb13gz22ePk+7Zz4vOiaGhWJ0Jziebd69FtSnoqO6/pXz6ah9PN7V+u5N8/gJkUxCX4N44Qt7/f2SqsDAFqtIuOaPzN7RifK/sbeEmCeJdmocVqzD2KMRoHgroc5I1rkhevTYlIoDjCwtvBWB+0U75/NsVh3AOTnoKQi6CVqF4elW38xDRnv8cwuAim+rGLvyb3zv5Y3GdooEWM+oTfTtOJasmT5WtpJD/NNeOETrRw==~4339505~3290928",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1773681448.149507,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_ga_Q622B96ZEQ",
+    "value": "GS2.1.s1773667049$o1$g1$t1773667115$j58$l0$h0",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1808227115.159203,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_abck",
+    "value": "3C2AC96D473B000A6B1E57E9DBB01094~0~YAAQz+NH0vx+7uGcAQAAs2DM9g9lxhcwQp5mcyrwi/r609hgW5bahOM71ocn9jR4jm3SsVOmefr4/Bc4qaja3lK7ILlHD6XN54klgUf4qPaCgXb7dmrG8nerIpRFJCRuAROiS/O22IyOsWws7+SiJ+dhhPQwucGfIgEE5wqK3HQOofn5XOdjtb+XRRVWJIl/i4ziyxdYEdguDB2kmmEZA9JWDf7RLEvxwN96XdcEZbaUSUmrKhN5tggsBUZGDqflQeFLSEOXRRWjXP32rXrVnKfMMhbjuzLW69YScwK0I0EZVMYAfakQqsiowDj8/vZpJzIVpup1zi9c9HJetarjjTztnyfdumauqpYSGB6xHjJHLS4WlL2R1rCJg+80NU47xN49F+a+yt0d5qFhM3yy64sMtz8UG66598zUY6N4Yg7HZJ7u54omlohQv9eBVGIpIkfOfRUiCapYeC/Fch3THWtgMAUSuspePA9XhpqkDnO57dCxztE5vO3K/+2GWK0N2u3KWQkgflMXKEEJAPA0yjot8lIJtkFKgxkh+LkUFN9CLpKELNESBWJaDFF/mhy709rvi8DRMAnJLMC6ny3AvoF0lUMsCmchdEMRB+V13GcAUw7Zg/xrvF93t3bya83I6QDDgL+mExkwTJeDHW2DrRgySF5FZeR31iZcs1p70NVU4Ek8JOvgnK1HwA9AIvrQQqY55ixtHt8gI+YtD2H6SR2ruWGJ9SeLo4QMiWr8GJcG0LZeFMPrOLEDyYgGYLyD5WBkUeYuS7n6cmFA58F4lQMz/dCgrzc1ajkBq0DuILnuhMzO0eKwNI6Nc/PZOz3jZehI+FtSUICPUNzzB4IRofqjaGBcKjY8+9v26VmOf+Nd8VQrUe2cRgnul3EH/aQJKFZ2Xt3XTYHwBKLobmHn0lk+RjsuiVs6jpgI8oEtaDjSAPpZurv+~-1~-1~1773670649~AAQAAAAF%2f%2f%2f%2f%2f7kGWVyUYw+5zwZFGPpvwT7bHFQlc7z4HmUoANI2vZ8gdVqKR+2Dwe%2fXXVvxvR6DSxPxRl5qp4f3siut3uefGiEdJis8Asagrfqx~-1",
+    "domain": ".xero.com",
+    "path": "/",
+    "expires": 1805203115.190289,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  }
+]
