@@ -10,6 +10,54 @@ const fs = require('fs');
 const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
 const LOGIN_URL = 'https://login.xero.com/identity/user/login';
 const COOKIE_FILE = path.join(__dirname, '.xero-session.json');
+const STORAGE_FILE = path.join(__dirname, '.xero-localstorage.json');
+
+async function saveSession(context, page) {
+  const cookies = await context.cookies();
+  fs.writeFileSync(COOKIE_FILE, JSON.stringify(cookies, null, 2));
+
+  // Save localStorage from each Xero domain we've visited
+  const storage = {};
+  for (const origin of ['https://go.xero.com', 'https://login.xero.com']) {
+    try {
+      await page.goto(origin, { waitUntil: 'domcontentloaded' });
+      storage[origin] = await page.evaluate(() => JSON.parse(JSON.stringify(localStorage)));
+    } catch { /* ignore */ }
+  }
+  fs.writeFileSync(STORAGE_FILE, JSON.stringify(storage, null, 2));
+  console.log(`  → Saved ${cookies.length} cookies + localStorage`);
+}
+
+async function restoreSession(context, page) {
+  if (!fs.existsSync(COOKIE_FILE)) return false;
+
+  const cookies = JSON.parse(fs.readFileSync(COOKIE_FILE, 'utf8'));
+  await context.addCookies(cookies);
+  console.log(`  → Loaded ${cookies.length} cookies`);
+
+  // Restore localStorage for each origin
+  if (fs.existsSync(STORAGE_FILE)) {
+    const storage = JSON.parse(fs.readFileSync(STORAGE_FILE, 'utf8'));
+    for (const [origin, items] of Object.entries(storage)) {
+      try {
+        await page.goto(origin, { waitUntil: 'domcontentloaded' });
+        await page.evaluate(items => {
+          for (const [k, v] of Object.entries(items)) localStorage.setItem(k, v);
+        }, items);
+        console.log(`  → Restored localStorage for ${origin} (${Object.keys(items).length} items)`);
+      } catch { /* ignore */ }
+    }
+  }
+
+  // Verify session
+  await page.goto('https://go.xero.com/app', { waitUntil: 'commit' });
+  await page.waitForTimeout(3000);
+  await page.waitForLoadState('networkidle').catch(() => null);
+
+  const url = page.url();
+  console.log(`  → Session check URL: ${url}`);
+  return url.includes('go.xero.com') && !url.includes('login.xero.com');
+}
 
 function prompt(question) {
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -28,19 +76,20 @@ function getOtp() {
 async function login(context, page) {
   console.log('\n[1/4] Logging in...');
 
-  // Load saved cookies — skips MFA if "Trust this device" was checked
-  if (fs.existsSync(COOKIE_FILE)) {
-    const cookies = JSON.parse(fs.readFileSync(COOKIE_FILE, 'utf8'));
-    await context.addCookies(cookies);
-    console.log('  → Loaded saved session (MFA may be skipped)');
+  // Step 1: try restoring full session (cookies + localStorage)
+  const restored = await restoreSession(context, page);
+  if (restored) {
+    console.log('  → Session restored — skipping login and MFA');
+    return;
   }
+  console.log('  → Session expired or not found, doing full login...');
 
+  // Step 2: full login
   await page.goto(LOGIN_URL);
   await page.fill('input[placeholder="Email address"]', config.xero.username);
   await page.fill('input[placeholder="Password"]', config.xero.password);
   await page.click('button:has-text("Log in")');
 
-  // Check if MFA is required (skipped if Trust this device cookie is present)
   const mfaRequired = await page.waitForURL(/two-factor/, { timeout: 8000 })
     .then(() => true).catch(() => false);
 
@@ -49,24 +98,23 @@ async function login(context, page) {
     const otp = await getOtp();
     await page.fill('input[placeholder="123456"]', otp);
 
-    // Tick "Trust this device"
     const trustBox = page.locator('[data-automationid="auth-remembermecheckbox--input"]');
-    if (await trustBox.isVisible({ timeout: 2000 }).catch(() => false)) {
+    const trustVisible = await trustBox.isVisible({ timeout: 2000 }).catch(() => false);
+    if (trustVisible) {
       await trustBox.check();
       console.log('  → Checked "Trust this device"');
     }
 
     await page.click('button:has-text("Confirm")');
   } else {
-    console.log('  → MFA skipped (trusted device)');
+    console.log('  → MFA skipped');
   }
 
   await page.waitForURL(/go\.xero\.com/, { timeout: 20000 });
   console.log('  → Login successful');
 
-  // Save cookies for next run
-  const cookies = await context.cookies();
-  fs.writeFileSync(COOKIE_FILE, JSON.stringify(cookies, null, 2));
+  // Save cookies + localStorage for next run
+  await saveSession(context, page);
 }
 
 // Inject a floating recorder UI into the page that tracks user interactions
@@ -268,8 +316,12 @@ async function testDownload(page, steps) {
 (async () => {
   console.log('=== Xero Report Recorder ===');
 
-  const browser = await chromium.launch({ headless: false });
-  const context = await browser.newContext({ acceptDownloads: true });
+  const PROFILE_DIR = path.join(__dirname, '.browser-profile');
+  fs.mkdirSync(PROFILE_DIR, { recursive: true });
+  const context = await chromium.launchPersistentContext(PROFILE_DIR, {
+    headless: false,
+    acceptDownloads: true,
+  });
   const page = await context.newPage();
 
   try {

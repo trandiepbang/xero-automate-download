@@ -113,9 +113,82 @@
           "label": "<a>"
         }
       ]
+    },
+    {
+      "name": "a",
+      "url": "/v1/Run/1400",
+      "enabled": true,
+      "steps": [
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1]/div[1]",
+          "label": "<div>"
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[2]/button[1]/span[1]",
+          "label": "<span> \"End of this month\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[2]/button[1]/span[1]",
+          "label": "<span> \"4 periods of 1 Month\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/section[1]/div[1]/div[1]/div[3]/button[1]/span[1]",
+          "label": "<span> \"Month\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[3]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[2]/button[1]/span[1]",
+          "label": "<span> \"Week\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/section[1]/footer[1]/button[2]",
+          "label": "<button> \"Apply\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[3]/div[1]/div[1]/button[1]",
+          "label": "<button> \"Due Date\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[2]/button[1]/span[1]",
+          "label": "<span> \"Invoice Date\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[4]/div[1]/div[1]/div[4]/div[1]/div[1]/div[7]/button[1]",
+          "label": "<button> \"Update\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[5]/div[1]/footer[1]/div[1]/div[2]/div[2]/button[1]",
+          "label": "<button> \"Export\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/div[10]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[2]/button[1]/span[1]",
+          "label": "<span> \"Excel\""
+        },
+        {
+          "action": "click",
+          "selector": "xpath=//body/a[1]",
+          "label": "<a>"
+        }
+      ]
     }
   ],
   "output_dir": "./downloads",
+  "schedule": {
+    "enabled": true,
+    "cron": "0 8 * * 1-5",
+    "timezone": "Australia/Sydney",
+    "test_run_after_seconds": 5
+  },
   "api_keys": {
     "anthropic": "",
     "mcp_server_url": "",
