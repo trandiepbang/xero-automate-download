@@ -1,2 +1,7 @@
 node_modules
 downloads
+.browser-profile
+.xero-localstorage.json
+.xero-session.json
+.claude/*.json
+.xero-session.json

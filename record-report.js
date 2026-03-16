@@ -89,9 +89,9 @@ async function login(context, page) {
   await page.fill('input[placeholder="Email address"]', config.xero.username);
   await page.fill('input[placeholder="Password"]', config.xero.password);
   await page.click('button:has-text("Log in")');
+  await page.waitForLoadState('networkidle').catch(() => null);
 
-  const mfaRequired = await page.waitForURL(/two-factor/, { timeout: 8000 })
-    .then(() => true).catch(() => false);
+  const mfaRequired = page.url().includes('two-factor');
 
   if (mfaRequired) {
     console.log('  → MFA required');
